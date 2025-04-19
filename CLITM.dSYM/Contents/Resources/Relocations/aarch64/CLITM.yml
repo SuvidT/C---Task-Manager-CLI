@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/suvidthungathurti/VS Code/C++ Task Manager CLI/CLITM'
+relocations:     []
+...
