@@ -10,7 +10,8 @@ public:
     enum class Progress {
         Todo,
         InProgress,
-        Done
+        Done,
+        None
     };
 
 private:
@@ -29,7 +30,9 @@ public:
         this->next = nullptr;
     }
 
-    ~Task();
+    ~Task() {
+        delete next;
+    };
 
     string get_description() const {
         return this->description;
@@ -60,6 +63,34 @@ public:
 class Tasks {
 private:
     Task* head;
+
+public:
+    Tasks() {
+        this->head = nullptr;
+    };
+
+    // not sure how this works exactly, or why there aren't other ways of doing this, will have to ask later
+    ~Tasks() {
+        Task* current = head;
+
+        while (current != nullptr) {
+            Task* next = current->get_next();
+            delete current;
+            current = next;
+        }
+    };
+
+    int add_task(const string& description) {
+        return 0;
+    };
+
+    void update_task(int id, const string& newDescrioption);
+
+    void delete_task(int id);
+
+    void change_progress(int id, Task::Progress newStatus);
+
+    void list_tasks(Task::Progress status);
 };
 
 // -------------------------

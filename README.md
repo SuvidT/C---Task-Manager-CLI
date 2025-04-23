@@ -3,18 +3,18 @@
 ## Todo
 
 ### Commands
-- [ ] add
-- [ ] update
-- [ ] delete
+- [ ] add {description}
+- [ ] update {id} {description}
+- [ ] delete {id}
+- [ ] mark
+    - [ ] todo {id}
+    - [ ] in-progress {id}
+    - [ ] done {id}
 - [ ] list
     - [ ] all
     - [ ] todo
     - [ ] in-progress
     - [ ] done
-- [ ] mark
-    - [ ] todo
-    - [ ] in-progress
-    - [ ] delete
 
 ### Classes:
 - [ ] task: this is a node of data
