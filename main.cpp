@@ -45,11 +45,11 @@ public:
         return this->next; 
     };
 
-    void change_description(const string& newDescription) {
+    void set_description(const string& newDescription) {
         this->description = newDescription;
     };
 
-    void change_progress(const Progress newStatus) {
+    void set_progress(const Progress newStatus) {
         this->status = newStatus;
     };
 
@@ -100,8 +100,14 @@ public:
         Task* current = head;
 
         while (current != nullptr) {
-
+            if (current->get_id() == id) {
+                current->set_description(newDescrioption);
+                return ;
+            }
+            Task* next = current->get_next();
         }
+        
+        throw invalid_argument("There is not task with id: " + to_string(id));
     };
 
     void delete_task(int id);
