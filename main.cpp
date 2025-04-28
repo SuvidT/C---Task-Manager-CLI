@@ -110,7 +110,52 @@ public:
         throw invalid_argument("There is not task with id: " + to_string(id));
     };
 
-    void delete_task(int id);
+    void delete_task(int id) {
+        if (head == nullptr) {
+            throw invalid_argument("There are no tasks to be deleted");
+        }
+    
+        if (head->get_id() == id) {
+            Task* temp = head;
+            head = head->get_next();
+            delete temp;
+            len--;
+            return;
+        }
+
+    /*
+        Task* current = head;
+        Task* prev = nullptr;
+    
+        while (current != nullptr && current->get_id() != id) {
+            prev = current;
+            current = current->get_next();
+        }
+    
+        if (current == nullptr) {
+            throw invalid_argument("There is no task with id: " + to_string(id));
+        }
+    
+        prev->set_next(current->get_next());
+        delete current;
+        len--;
+    */
+        
+        Task* current = head;
+
+        while (current != nullptr) {
+            if (current->get_next()->get_id() == id) {
+                Task* target = current->get_next()->get_next();
+                Task* del = current->get_next();
+
+                current->set_next(target);
+
+                delete del;
+                len--;
+                return;
+            }
+        }
+    }
 
     void change_progress(int id, Task::Progress newStatus);
 
