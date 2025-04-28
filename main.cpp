@@ -122,39 +122,21 @@ public:
             len--;
             return;
         }
-
-    /*
+    
         Task* current = head;
-        Task* prev = nullptr;
     
-        while (current != nullptr && current->get_id() != id) {
-            prev = current;
-            current = current->get_next();
-        }
-    
-        if (current == nullptr) {
-            throw invalid_argument("There is no task with id: " + to_string(id));
-        }
-    
-        prev->set_next(current->get_next());
-        delete current;
-        len--;
-    */
-        
-        Task* current = head;
-
-        while (current != nullptr) {
+        while (current->get_next() != nullptr) {
             if (current->get_next()->get_id() == id) {
-                Task* target = current->get_next()->get_next();
-                Task* del = current->get_next();
-
-                current->set_next(target);
-
-                delete del;
+                Task* toDelete = current->get_next();
+                current->set_next(toDelete->get_next());
+                delete toDelete;
                 len--;
                 return;
             }
+            current = current->get_next();
         }
+    
+        throw invalid_argument("There is no task with id: " + to_string(id));
     }
 
     void change_progress(int id, Task::Progress newStatus);
