@@ -1,4 +1,7 @@
 #include "Task.h"
+#include <iostream>
+
+// Remove using namespace std;
 
 Task::Task(int id, std::string description) {
     this->id = id;
@@ -33,4 +36,25 @@ void Task::set_progress(const Progress newStatus) {
 
 void Task::set_next(Task* nextTask) {
     this->next = nextTask;
+}
+
+std::ostream& operator<<(std::ostream& os, const Task::Progress& progress) {
+    switch (static_cast<int>(progress)) {
+    case static_cast<int>(Task::Progress::Todo):
+        os << "Todo";
+        break;
+    case static_cast<int>(Task::Progress::InProgress):
+        os << "InProgress";
+        break;
+    case static_cast<int>(Task::Progress::Done):
+        os << "Done";
+        break;
+    case static_cast<int>(Task::Progress::None):
+        os << "None";
+        break;
+    default:
+        os << "Unknown";
+        break;
+    }
+    return os;
 }

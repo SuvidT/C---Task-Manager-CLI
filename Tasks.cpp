@@ -30,11 +30,10 @@ int Tasks::add_task(const string& description) {
 
 void Tasks::update_task(int id, const string& newDescription) {
     if (head == nullptr) {
-        throw invalid_argument("There are not tasks to be updated");
+        throw invalid_argument("There are no tasks to be updated");
     }
 
     Task* current = head;
-
     while (current != nullptr) {
         if (current->get_id() == id) {
             current->set_description(newDescription);
@@ -43,7 +42,7 @@ void Tasks::update_task(int id, const string& newDescription) {
         current = current->get_next();
     }
 
-    throw invalid_argument("There is not task with id: " + to_string(id));
+    throw invalid_argument("There is no task with id: " + to_string(id));
 }
 
 void Tasks::delete_task(int id) {
@@ -60,15 +59,20 @@ void Tasks::delete_task(int id) {
     }
 
     Task* current = head;
+    Task* prev = nullptr;
 
-    while (current->get_next() != nullptr) {
-        if (current->get_next()->get_id() == id) {
-            Task* toDelete = current->get_next();
-            current->set_next(toDelete->get_next());
-            delete toDelete;
+    while (current != nullptr) {
+        if (current->get_id() == id) {
+            if (prev != nullptr) {
+                prev->set_next(current->get_next());
+            } else {
+                head = current->get_next();
+            }
+            delete current;
             len--;
             return;
         }
+        prev = current;
         current = current->get_next();
     }
 
@@ -80,9 +84,32 @@ void Tasks::change_progress(int id, Task::Progress newStatus) {
         throw invalid_argument("There is no task to change the progress of");
     }
 
-    // Implementation for changing progress goes here
+    Task* current = head;
+    while (current != nullptr) {
+        if (current->get_id() == id) {
+            current->set_progress(newStatus);
+            return;
+        }
+        current = current->get_next();
+    }
+
+    throw invalid_argument("There is no task with id: " + to_string(id));
 }
 
 void Tasks::list_tasks(Task::Progress status) {
-    // Implementation for listing tasks goes here
+    Task* current = head;
+
+    if (status == Task::Progress::None) {
+        while (current != nullptr) {
+            cout << current->get_id() << " " << current->get_description() << " " << current->get_progress() << endl;
+            current = current->get_next();
+        }
+    } else {
+        while (current != nullptr) {
+            if (current->get_progress() == status) {
+                cout << current->get_id() << " " << current->get_description() << " " << current->get_progress() << endl;
+            }
+            current = current->get_next();
+        }
+    }
 }

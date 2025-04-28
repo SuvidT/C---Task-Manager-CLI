@@ -2,6 +2,7 @@
 #define TASK_H
 
 #include <string>
+#include <iostream>
 
 class Task {
 public:
@@ -29,6 +30,8 @@ public:
     void set_description(const std::string& newDescription);
     void set_progress(const Progress newStatus);
     void set_next(Task* nextTask);
+
+    friend std::ostream& operator<<(std::ostream& os, const Task::Progress& progress);
 };
 
 #endif
