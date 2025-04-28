@@ -3,23 +3,23 @@
 ## Todo
 
 ### Commands
-- [ ] add {description}
-- [ ] update {id} {description}
-- [ ] delete {id}
-- [ ] mark
-    - [ ] todo {id}
-    - [ ] in-progress {id}
-    - [ ] done {id}
-- [ ] list
-    - [ ] all
-    - [ ] todo
-    - [ ] in-progress
-    - [ ] done
+- [x] add {description}
+- [x] update {id} {description}
+- [x] delete {id}
+- [x] mark
+    - [x] todo {id}
+    - [x] in-progress {id}
+    - [x] done {id}
+- [x] list
+    - [x] all
+    - [x] todo
+    - [x] in-progress
+    - [x] done
 
 ### Classes:
-- [ ] task: this is a node of data
-- [ ] tasks: this handles all the tasks
-- [ ] main: this handles all the commands
+- [x] task: this is a node of data
+- [x] tasks: this handles all the tasks
+- [x] main: this handles all the commands
 
 Task Properties:
 - id
